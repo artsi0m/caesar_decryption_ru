@@ -6,7 +6,8 @@ alphabet = { 1: "а", 2: "б", 3: "в", 4: "г", 5: "д", 6:"е", 7:"ё", 8:"ж"
 18:"р", 19:"с", 20:"т", 21:"у", 22:"ф", 23:"х", 24:"ц", 25:"ч", 26:"ш",
 27:"щ", 28:"ъ", 29:"ы", 30:"ь", 31:"э", 32:"ю", 33:"я" }
 alphabet_r = { x:y for y, x in alphabet.items()}
-most_frequent_letters =  ["о", "е", "е", "и" ]
+most_frequent_letters =  ["о", "е", "е", "и", "н", "т", "с", "р", "в",
+"л", "к", "м" ]
 
 def decrypt_cipher(key):
     print(str(key))
@@ -30,16 +31,18 @@ def get_keys(ld):
         item = alphabet_r[common_ch] -  alphabet_r[frequent_ch]
         if item < 0:
             item = 33 + item
-        yield item
+        if item != 0:
+            yield item
 
 def main():
-    print(alphabet_r)
     global ciphertext
     with open("ciphertext.txt", "r") as file:
          ciphertext = file.readline()
 
     ciphertext = ciphertext.lower()
-    most_common_letters = [ x for (x, y) in collections.Counter(ciphertext.replace(" ", "")).most_common(6)]
+# Здесь я пытался использовать частотность букв в русском языке
+    nl = len(most_frequent_letters)
+    most_common_letters = [ x for (x, y) in collections.Counter(ciphertext.replace(" ", "")).most_common(nl)]
     print(most_frequent_letters)
     print(most_common_letters)
     lookup_table = list(zip(most_frequent_letters, most_common_letters))
@@ -47,7 +50,9 @@ def main():
     key_lists = [key for key in get_keys(lookup_table)]
     for key in key_lists:
          decrypt_cipher(key)
-
+# А здесь мне стало лень и решил перебором
+    for n in range(1,33):
+         decrypt_cipher(n)
 
 if __name__ == "__main__":
     main()
