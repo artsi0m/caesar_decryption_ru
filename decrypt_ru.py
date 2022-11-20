@@ -7,7 +7,7 @@ alphabet = { 1: "а", 2: "б", 3: "в", 4: "г", 5: "д", 6:"е", 7:"ё", 8:"ж"
 27:"щ", 28:"ъ", 29:"ы", 30:"ь", 31:"э", 32:"ю", 33:"я" }
 alphabet_r = { x:y for y, x in alphabet.items()}
 
-most_frequent_letters =  ["о", "е", "е", "и" ]
+most_frequent_letters =  ["о", "е", "a", "и" ]
 
 def decrypt_cipher(key):
     print(str(key))
