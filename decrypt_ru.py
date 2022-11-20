@@ -6,8 +6,8 @@ alphabet = { 1: "а", 2: "б", 3: "в", 4: "г", 5: "д", 6:"е", 7:"ё", 8:"ж"
 18:"р", 19:"с", 20:"т", 21:"у", 22:"ф", 23:"х", 24:"ц", 25:"ч", 26:"ш",
 27:"щ", 28:"ъ", 29:"ы", 30:"ь", 31:"э", 32:"ю", 33:"я" }
 alphabet_r = { x:y for y, x in alphabet.items()}
-most_frequent_letters =  ["о", "е", "е", "и", "н", "т", "с", "р", "в",
-"л", "к", "м" ]
+
+most_frequent_letters =  ["о", "е", "е", "и" ]
 
 def decrypt_cipher(key):
     print(str(key))
@@ -34,6 +34,13 @@ def get_keys(ld):
         if item != 0:
             yield item
 
+def create_lookup_table(lst_one, lst_two):
+    lst_res = []
+    for el_one in lst_one:
+        for el_two in lst_two:
+            lst_res.append(*zip(el_one, el_two))
+    return lst_res 
+
 def main():
     global ciphertext
     with open("ciphertext.txt", "r") as file:
@@ -45,14 +52,15 @@ def main():
     most_common_letters = [ x for (x, y) in collections.Counter(ciphertext.replace(" ", "")).most_common(nl)]
     print(most_frequent_letters)
     print(most_common_letters)
-    lookup_table = list(zip(most_frequent_letters, most_common_letters))
+    lookup_table = create_lookup_table(most_frequent_letters, most_common_letters)
     print(lookup_table)
     key_lists = [key for key in get_keys(lookup_table)]
     for key in key_lists:
-         decrypt_cipher(key)
+          print(key)
+#         decrypt_cipher(key)
 # А здесь мне стало лень и решил перебором
-    for n in range(1,33):
-         decrypt_cipher(n)
+#    for n in range(1,33):
+#         decrypt_cipher(n)
 
 if __name__ == "__main__":
     main()
