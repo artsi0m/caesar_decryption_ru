@@ -9,8 +9,16 @@ alphabet_r = { x:y for y, x in alphabet.items()}
 
 most_frequent_letters =  ["о", "е", "а", "и" ]
 
+def print_key(key):
+    if key > 16:
+        key = 33 - key
+        print('{} влево'.format(key))
+    else:
+        print('{} вправо'.format(key))
+
+
 def decrypt_cipher(key):
-    print(str(key))
+    print_key(key)
     for char in ciphertext:
         if char in alphabet_r.keys():
             c_pos = int(alphabet_r[char])
