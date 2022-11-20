@@ -39,7 +39,7 @@ def create_lookup_table(lst_one, lst_two):
     for el_one in lst_one:
         for el_two in lst_two:
             lst_res.append(*zip(el_one, el_two))
-    return lst_res 
+    return list(set(lst_res)) 
 
 def main():
     global ciphertext
@@ -56,11 +56,7 @@ def main():
     print(lookup_table)
     key_lists = [key for key in get_keys(lookup_table)]
     for key in key_lists:
-          print(key)
-#         decrypt_cipher(key)
-# А здесь мне стало лень и решил перебором
-#    for n in range(1,33):
-#         decrypt_cipher(n)
+          decrypt_cipher(key)
 
 if __name__ == "__main__":
     main()
